@@ -6,6 +6,7 @@ import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
@@ -31,6 +32,7 @@ const user = page.props.auth.user as User;
 const form = useForm({
     name: user.name,
     email: user.email,
+    bio: user.bio,
 });
 
 const submit = () => {
@@ -85,6 +87,11 @@ const submit = () => {
                         <div v-if="status === 'verification-link-sent'" class="mt-2 text-sm font-medium text-green-600">
                             A new verification link has been sent to your email address.
                         </div>
+                    </div>
+                    <div class="grid gap-2">
+                        <Label for="bio">Bio</Label>
+                        <Textarea id="bio" class="mt-1 w-full resize-none" v-model="form.bio" placeholder="Your bio" :maxlength="150" />
+                        <InputError class="mt-2" :message="form.errors.bio" />
                     </div>
 
                     <div class="flex items-center gap-4">

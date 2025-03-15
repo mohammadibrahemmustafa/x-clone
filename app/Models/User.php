@@ -12,9 +12,10 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids;
+    use HasFactory, HasUuids, Notifiable;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     /**
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
     ];
 
     /**
