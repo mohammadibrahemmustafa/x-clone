@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->nullable();
-            $table->string('bio')->max(150)->nullable();
+            $table->string('bio', config('constants.user.bio_max_length'))->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
