@@ -96,4 +96,19 @@ class ProfileUpdateTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
+
+    public function test_bio_greater_than_defined_length_cannot_be_saved()
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post('/settings/profile', [
+                'name' => $user->name,
+                'email' => $user->email,
+                'bio' => str_repeat('a', config('constants.user.bio_max_length') + 1),
+            ]);
+        $response
+            ->assertSessionHasErrors('bio');
+    }
 }
