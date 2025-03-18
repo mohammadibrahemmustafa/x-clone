@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem, type SharedData, type User } from '@/types';
+import ImageUploader from '@/components/ui/image-uploader/ImageUploader.vue';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -33,10 +34,11 @@ const form = useForm({
     name: user.name,
     email: user.email,
     bio: user.bio,
+    avatar: user.avatar_url,
 });
 
 const submit = () => {
-    form.patch(route('profile.update'), {
+    form.post(route('profile.update'), {
         preserveScroll: true,
     });
 };
@@ -93,7 +95,18 @@ const submit = () => {
                         <Textarea id="bio" class="mt-1 w-full resize-none" v-model="form.bio" placeholder="Your bio" :maxlength="150" />
                         <InputError class="mt-2" :message="form.errors.bio" />
                     </div>
-
+                    <div class="grid gap-2">
+                        <Label for="avatar">Profile Picture</Label>
+                        <ImageUploader
+                            id="avatar"
+                            type="file"
+                            class="mt-1 block w-full"
+                            v-model="form.avatar"
+                            placeholder="Your Profile Picture"
+                            accept="image/*"
+                        />
+                        <InputError class="mt-2" :message="form.errors.avatar" />
+                    </div>
                     <div class="flex items-center gap-4">
                         <Button :disabled="form.processing">Save</Button>
 
