@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,6 +45,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class, 'created_by');
+    }
 
     /**
      * Get the attributes that should be cast.
