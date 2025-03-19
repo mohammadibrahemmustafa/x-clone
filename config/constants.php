@@ -1,7 +1,10 @@
-<?php 
+<?php
 
 return [
     'user' => [
         'bio_max_length' => 150,
+    ],
+    'tweet' => [
+        'content_max_length' => 280,
     ],
 ];
