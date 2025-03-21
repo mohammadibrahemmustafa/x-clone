@@ -7,4 +7,7 @@ return [
     'tweet' => [
         'content_max_length' => 280,
     ],
+    'tweets' => [
+        'per_page' => 10,
+    ],
 ];
