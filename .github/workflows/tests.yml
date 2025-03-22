@@ -91,4 +91,4 @@ jobs:
           DB_HOST: 127.0.0.1
         run: |
           php artisan config:clear
-          ./vendor/bin/phpunit --verbose
+          ./vendor/bin/phpunit
