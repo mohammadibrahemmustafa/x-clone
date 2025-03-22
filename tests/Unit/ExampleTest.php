@@ -11,7 +11,6 @@ class ExampleTest extends TestCase
 
     public function test_that_true_is_true()
     {
-        dd(config('database.connections.mysql.host'));
         $this->assertTrue(true);
     }
 }
