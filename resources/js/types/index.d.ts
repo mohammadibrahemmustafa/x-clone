@@ -37,3 +37,25 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+interface TweetUser {
+  id: string;
+  username: string;
+  name: string;
+  avatar_url?: string | null;
+}
+
+interface Tweet {
+  id: string;
+  content: string;
+  created_at: string;
+  user: TweetUser;
+}
+
+export interface FeedProps {
+  tweets: {
+    data: Tweet[];
+    next_page_url: string | null;
+  };
+  maxTweetLength: number;
+}
