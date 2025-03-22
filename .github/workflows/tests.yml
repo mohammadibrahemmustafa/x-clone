@@ -81,5 +81,9 @@ jobs:
       - name: Debug .env
         run: cat .env
 
+      - name: Clear Laravel caches
+        run: |
+          php artisan config:clear
+          php artisan cache:clear
       - name: Tests
         run: ./vendor/bin/phpunit
