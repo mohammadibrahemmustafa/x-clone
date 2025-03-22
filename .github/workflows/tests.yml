@@ -22,8 +22,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: testing
-          MYSQL_USER: laravel
-          MYSQL_PASSWORD: secret
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
