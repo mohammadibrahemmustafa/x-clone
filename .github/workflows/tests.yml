@@ -80,6 +80,6 @@ jobs:
       
       - name: Debug .env
         run: cat .env
-        
+
       - name: Tests
-        run: ./vendor/bin/phpunit  --verbose
+        run: ./vendor/bin/phpunit
