@@ -85,5 +85,10 @@ jobs:
         run: |
           php artisan config:clear
           php artisan cache:clear
-      - name: Tests
-        run: ./vendor/bin/phpunit
+      - name: Run Tests
+        env:
+          APP_ENV: testing
+          DB_HOST: 127.0.0.1
+        run: |
+          php artisan config:clear
+          ./vendor/bin/phpunit --verbose
