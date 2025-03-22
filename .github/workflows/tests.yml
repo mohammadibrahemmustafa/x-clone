@@ -13,7 +13,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    
+
     services:
       mysql:
         image: mysql:8.0
@@ -31,7 +31,7 @@ jobs:
           --health-retries=3
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup PHP
@@ -53,12 +53,12 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Copy Testing Environment
-        run: | 
+      - name: Copy test environment file
+        run: |
           cp .env.testing .env
           sed -i 's/DB_HOST=mysql/DB_HOST=127.0.0.1/' .env
 
-      - name: Wait for MySQL
+      - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
           until mysql -h 127.0.0.1 -u sail -ppassword -e "SELECT 1"; do
@@ -66,29 +66,23 @@ jobs:
           done
           echo "MySQL is ready!"
 
-      - name: Generate Application Key
+      - name: Generate Laravel application key
         run: php artisan key:generate
 
-      - name: Run Migrations
+      - name: Run migrations
         run: php artisan migrate --force
 
-      - name: Publish Ziggy Configuration
+      - name: Publish Ziggy configuration
         run: php artisan ziggy:generate
 
-      - name: Build Assets
+      - name: Build frontend assets
         run: npm run build
-      
-      - name: Debug .env
-        run: cat .env
 
-      - name: Clear Laravel caches
-        run: |
-          php artisan config:clear
-          php artisan cache:clear
-      - name: Run Tests
+      - name: Run tests
         env:
           APP_ENV: testing
           DB_HOST: 127.0.0.1
         run: |
           php artisan config:clear
+          php artisan cache:clear
           ./vendor/bin/phpunit
