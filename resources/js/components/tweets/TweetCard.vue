@@ -1,4 +1,3 @@
-<!-- src/components/TweetCard.vue -->
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3';
 import { formatDistanceToNow } from 'date-fns';
